@@ -10,8 +10,8 @@ inherit autotools
 SRC_URI = "http://swupdate.openvpn.org/community/releases/openvpn-${PV}.tar.gz \
            file://openvpn"
 
-SRC_URI[md5sum] = "7486d3e270ba4b033e311d3e022a0ad7"
-SRC_URI[sha256sum] = "5185181df2e6043bd667377bc92e36ea5a5bd7600af209654f109b6403ca5b36"
+SRC_URI[md5sum] = "06e5f93dbf13f2c19647ca15ffc23ac1"
+SRC_URI[sha256sum] = "20bda3f9debb9a52db262aecddfa4e814050a9404a9106136b7e3b6f7ef36ffc"
 
 CFLAGS += "-fno-inline"
 
