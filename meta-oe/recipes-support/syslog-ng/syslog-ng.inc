@@ -104,4 +104,4 @@ python () {
 }
 
 INITSCRIPT_NAME = "syslog"
-INITSCRIPT_PARAMS = "start 20 2 3 4 5 . stop 90 0 1 6 ."
+INITSCRIPT_PARAMS = "start 19 2 3 4 5 . stop 90 0 1 6 ."
