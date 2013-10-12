@@ -11,14 +11,14 @@ test -x "$syslog_ng" || exit 0
 
 case "$1" in
   start)
-    echo -n "Starting syslog-ng:"
+    [ "${VERBOSE}" != "no" ] && echo -n "Starting syslog-ng:"
     start-stop-daemon --start --quiet --exec $syslog_ng
-    echo "."
+    [ "${VERBOSE}" != "no" ] && echo "."
     ;;
   stop)
-    echo -n "Stopping syslog-ng:"
+    [ "${VERBOSE}" != "no" ] && echo -n "Stopping syslog-ng:"
     start-stop-daemon --stop --quiet --pidfile /var/run/syslog-ng.pid
-    echo "."
+    [ "${VERBOSE}" != "no" ] && echo "."
     ;;
   reload|force-reload)
     start-stop-daemon --stop --quiet --signal 1 --exec $syslog_ng
