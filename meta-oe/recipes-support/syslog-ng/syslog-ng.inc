@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=7ec1bcc46f28b11f4722e20d9b7dd4d5"
 # update-rc.d and update-alternatives is important
 RDEPENDS_${PN} += " ${@base_conditional("ONLINE_PACKAGE_MANAGEMENT", "none", "", "update-rc.d", d)}"
 
-INC_PR = "r12"
+INC_PR = "r13"
 
 inherit autotools systemd
 
@@ -51,7 +51,7 @@ FILES_${PN} = "${bindir}/* ${sbindir}/* ${libexecdir}/* ${libdir}/lib*${SOLIBS} 
     ${base_libdir}/*${SOLIBS} \
     ${datadir}/${BPN} ${libdir}/${BPN}/*${SOLIBS} \
     ${datadir}/include/scl/ ${datadir}/xsd"
-FILES_${PN}-dev += "${libdir}/${BPN}/lib*.la ${libdir}/${BPN}/*${SOLIBSDEV}"
+FILES_${PN}-dev += "${libdir}/${BPN}/lib*.la"
 CONFFILES_${PN} = "${sysconfdir}/${PN}.conf ${sysconfdir}/scl.conf ${sysconfdir}/scl-modules.conf"
 
 RPROVIDES_${PN} += "${PN}-systemd"
@@ -71,7 +71,7 @@ pkg_postinst_${PN} () {
     # remove all rc.d-links potentially created from alternative
     # syslog packages before creating new ones
     update-rc.d $OPT -f syslog remove
-    update-rc.d $OPT syslog start 20 2 3 4 5 . stop 90 0 1 6 .
+    update-rc.d $OPT syslog start 19 2 3 4 5 . stop 90 0 1 6 .
 }
 
 pkg_prerm_${PN} () {
