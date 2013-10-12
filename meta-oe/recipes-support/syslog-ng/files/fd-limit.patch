@@ -1,0 +1,36 @@
+diff --git ./lib/gprocess.c-orig ./lib/gprocess.c
+index 3729ecb..6abef20 100644
+--- ./lib/gprocess.c-orig
++++ ./lib/gprocess.c
+@@ -604,23 +604,6 @@ g_process_detach_tty(void)
+ }
+ 
+ /**
+- * g_process_change_limits:
+- *
+- * Set fd limit.
+- *
+- **/
+-static void
+-g_process_change_limits(void)
+-{
+-  struct rlimit limit;
+-
+-  limit.rlim_cur = limit.rlim_max = process_opts.fd_limit_min;
+-  
+-  if (setrlimit(RLIMIT_NOFILE, &limit) < 0)
+-    g_process_message("Error setting file number limit; limit='%d'; error='%s'", process_opts.fd_limit_min, g_strerror(errno));
+-}
+-
+-/**
+  * g_process_detach_stdio:
+  *
+  * Use /dev/null as input/output/error. This function is idempotent, can be
+@@ -1253,7 +1236,6 @@ g_process_start(void)
+   pid_t pid;
+   
+   g_process_detach_tty();
+-  g_process_change_limits();
+   g_process_resolve_names();
+   
+   if (process_opts.mode == G_PM_BACKGROUND)

@@ -4,6 +4,7 @@ PR = "${INC_PR}.1"
 SRC_URI += " \
     file://syslog-ng.conf \
     file://initscript \
+    file://fd-limit.patch \
 "
 
 FILES_${PN} += "${libdir}/${BPN}/*"
