@@ -25,3 +25,5 @@ do_install_append() {
 }
 
 RRECOMMENDS_${PN} = "kernel-module-tun"
+
+INSANE_SKIP_${PN} = "debug-files"
