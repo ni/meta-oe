@@ -34,3 +34,5 @@ RREPLACES_${PN} += "${PN}-systemd"
 RCONFLICTS_${PN} += "${PN}-systemd"
 SYSTEMD_SERVICE_${PN} = "udisks-daemon.service"
 SYSTEMD_AUTO_ENABLE = "disable"
+
+PARALLEL_MAKE = ""
