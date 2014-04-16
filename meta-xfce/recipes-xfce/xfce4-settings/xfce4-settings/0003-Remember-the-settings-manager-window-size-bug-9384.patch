@@ -128,7 +128,7 @@ index 043b143..39e33ff 100644
 +      xfconf_channel_get_int (dialog->channel, "/last/window-height", 500));
      xfce_settings_manager_dialog_set_title (dialog, NULL, NULL, NULL);
  
-     dialog->button_back = xfce_gtk_button_new_mixed (GTK_STOCK_GO_BACK, _("All _Settings"));
+     dialog->button_back = xfce_gtk_button_new_mixed (GTK_STOCK_GO_BACK, _("_All Settings"));
 @@ -334,6 +340,20 @@ xfce_settings_manager_dialog_response (GtkDialog *widget,
      }
      else
