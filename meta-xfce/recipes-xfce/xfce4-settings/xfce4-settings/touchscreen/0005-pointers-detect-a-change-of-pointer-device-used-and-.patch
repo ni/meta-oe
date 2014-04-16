@@ -244,7 +244,7 @@ index 62ebc60..32662cc 100644
 +    XDeviceInfo           *device_list, *device_info;
 +    gint                   n, ndevices;
 +    XDevice               *device;
-+    XfcePointerDeviceData *device_data;
++    XfcePointerDeviceData *device_data = NULL;
 +    gchar                 *device_name;
 +    gchar                  prop[256];
 +    gboolean               right_handed;
