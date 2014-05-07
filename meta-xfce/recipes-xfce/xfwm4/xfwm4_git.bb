@@ -17,6 +17,8 @@ PV = "4.10.1+git${SRCPV}"
 
 EXTRA_OECONF += "--enable-maintainer-mode"
 
+SRC_URI += "file://touch_events_on_window_frame.patch"
+
 python populate_packages_prepend () {
     themedir = d.expand('${datadir}/themes')
     do_split_packages(d, themedir, '^(.*)', 'xfwm4-theme-%s', 'XFWM4 theme %s', allow_dirs=True)

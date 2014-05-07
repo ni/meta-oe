@@ -1,0 +1,17 @@
+diff -u -p -r xfwm4-4.10.0.orig/src/events.c xfwm4-4.10.0/src/events.c
+--- xfwm4-4.10.0.orig/src/events.c	2012-04-28 15:56:34.000000000 -0500
++++ xfwm4-4.10.0/src/events.c	2014-05-01 14:42:24.647795224 -0500
+@@ -888,6 +888,13 @@ handleButtonPress (DisplayInfo *display_
+     {
+         state = ev->state & MODIFIER_MASK;
+         win = ev->subwindow;
++        if (!win) {
++	    Window root_ret;
++	    int rx,ry,wx,wy;
++	    unsigned int mask_ret;
++	    XQueryPointer(display_info->dpy, ev->window,
++	        &root_ret, &win, &rx, &ry, &wx, &wy, &mask_ret);
++        }
+         screen_info = c->screen_info;
+ 
+         if ((ev->button == Button1) && (state) && (state == screen_info->params->easy_click))
