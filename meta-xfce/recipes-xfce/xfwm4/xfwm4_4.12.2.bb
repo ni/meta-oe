@@ -10,6 +10,8 @@ SRC_URI += "file://0001-don-t-block-display-events-when-time-is-set-backward.pat
 SRC_URI[md5sum] = "3728768dd9ea0de624cd3efc5dcccbca"
 SRC_URI[sha256sum] = "5bb5f72b41060d10bd3823f8b69abcd462bbd8853fdf9c82041450ae68e7d75a"
 
+SRC_URI += "file://touch_events_on_window_frame.patch"
+
 python populate_packages_prepend () {
     themedir = d.expand('${datadir}/themes')
     do_split_packages(d, themedir, '^(.*)', 'xfwm4-theme-%s', 'XFWM4 theme %s', allow_dirs=True)
