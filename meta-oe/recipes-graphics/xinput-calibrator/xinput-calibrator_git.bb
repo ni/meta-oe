@@ -11,7 +11,8 @@ inherit autotools systemd
 
 SRCREV = "c01c5af807cb4b0157b882ab07a893df9a810111"
 SRC_URI = "git://github.com/tias/xinput_calibrator.git;protocol=git \
-           file://xinput-calibrator.service"
+           file://xinput-calibrator.service \
+           file://Allow-xinput_calibrator_pointercal.sh-to-be-run-as-n.patch"
 
 S = "${WORKDIR}/git"
 
