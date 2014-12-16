@@ -40,11 +40,15 @@ do_install() {
     oe_runmake 'DESTDIR=${D}' install
 }
 
-PACKAGES =+ "${PN}-ri-docs"
+PACKAGES =+ "${PN}-ri-docs ${PN}-rdoc"
 
 SUMMARY_${PN}-ri-docs = "ri (Ruby Interactive) documentation for the Ruby standard library"
 RDEPENDS_${PN}-ri-docs = "${PN}"
 FILES_${PN}-ri-docs += "${datadir}/ri"
+
+SUMMARY_${PN}-rdoc = "RDoc documentation generator from Ruby source"
+RDEPENDS_${PN}-rdoc = "${PN}"
+FILES_${PN}-rdoc += "${libdir}/ruby/rdoc"
 
 FILES_${PN} += "${datadir}/rubygems"
 
