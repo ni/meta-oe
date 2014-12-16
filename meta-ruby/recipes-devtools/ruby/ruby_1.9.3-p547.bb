@@ -40,8 +40,13 @@ do_install() {
     oe_runmake 'DESTDIR=${D}' install
 }
 
-FILES_${PN} += "${datadir}/rubygems \
-                ${datadir}/ri"
+PACKAGES =+ "${PN}-ri-docs"
+
+SUMMARY_${PN}-ri-docs = "ri (Ruby Interactive) documentation for the Ruby standard library"
+RDEPENDS_${PN}-ri-docs = "${PN}"
+FILES_${PN}-ri-docs += "${datadir}/ri"
+
+FILES_${PN} += "${datadir}/rubygems"
 
 FILES_${PN}-dbg += "${libdir}/ruby/*/.debug \
                     ${libdir}/ruby/*/*/.debug \
