@@ -88,9 +88,18 @@ do_install_append_class-native() {
 # fixme
 do_install_append_class-target() {
     install -d ${D}/${sysconfdir}/
-    if [ -d ${D}/${STAGING_DIR_NATIVE}/${sysconfdir} ];then
-         mv ${D}/${STAGING_DIR_NATIVE}/${sysconfdir}/* ${D}/${sysconfdir}/
+
+    ZYNQ_PATH=`echo ${STAGING_DIR_NATIVE} | sed 's/x64/zynq/'`
+    X64_PATH=`echo ${STAGING_DIR_NATIVE} | sed 's/zynq/x64/'`
+
+    if [ -d ${D}/${ZYNQ_PATH}/${sysconfdir} ]; then
+        mv ${D}/${ZYNQ_PATH}/${sysconfdir}/* ${D}/${sysconfdir}/
     fi
+
+    if [ -d ${D}/${X64_PATH}/${sysconfdir} ]; then
+        mv ${D}/${X64_PATH}/${sysconfdir}/* ${D}/${sysconfdir}/
+    fi
+
     rm -rf ${D}/${TMPDIR}
     rm -rf ${D}/.registry
     rm -rf ${D}/.channels
