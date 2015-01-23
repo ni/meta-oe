@@ -89,15 +89,19 @@ do_install_append_class-native() {
 do_install_append_class-target() {
     install -d ${D}/${sysconfdir}/
 
-    ZYNQ_PATH=`echo ${STAGING_DIR_NATIVE} | sed 's/x64/zynq/'`
-    X64_PATH=`echo ${STAGING_DIR_NATIVE} | sed 's/zynq/x64/'`
+    ZYNQ_PATH=`echo ${STAGING_DIR_NATIVE} | sed 's/x64/armv7-a/'`
+    X64_PATH=`echo ${STAGING_DIR_NATIVE} | sed 's/armv7-a/x64/'`
+    ZYNQ_TEMP=`echo ${TMPDIR} | sed 's/x64/armv7-a/'`
+    X64_TEMP=`echo ${TMPDIR} | sed 's/armv7-a/x64/'`
 
     if [ -d ${D}/${ZYNQ_PATH}/${sysconfdir} ]; then
-        mv ${D}/${ZYNQ_PATH}/${sysconfdir}/* ${D}/${sysconfdir}/
+        mv -f ${D}/${ZYNQ_PATH}/${sysconfdir}/* ${D}/${sysconfdir}/ | true
+        TMP=`dirname ${D}/${ZYNQ_TEMP}`
     fi
 
     if [ -d ${D}/${X64_PATH}/${sysconfdir} ]; then
-        mv ${D}/${X64_PATH}/${sysconfdir}/* ${D}/${sysconfdir}/
+        mv -f ${D}/${X64_PATH}/${sysconfdir}/* ${D}/${sysconfdir}/ | true
+        TMP=`dirname ${D}/${X64_TEMP}`
     fi
 
     rm -rf ${D}/${TMPDIR}
@@ -115,9 +119,8 @@ do_install_append_class-target() {
     sed -i 's:=/etc:=${sysconfdir}:g' ${B}/sapi/fpm/init.d.php-fpm
     sed -i 's:=/var:=${localstatedir}:g' ${B}/sapi/fpm/init.d.php-fpm
     install -m 0755 ${B}/sapi/fpm/init.d.php-fpm ${D}${sysconfdir}/init.d/php-fpm
-    TMP=`dirname ${D}/${TMPDIR}`
     while test ${TMP} != ${D}; do
-        rmdir ${TMP}
+        rm -rf ${TMP}
         TMP=`dirname ${TMP}`;
     done
 }
