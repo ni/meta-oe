@@ -28,10 +28,17 @@ SRC_URI = "http://ftp.postgresql.org/pub/source/v${PV}/${BP}.tar.bz2 \
            file://postgresql.init \
            file://postgresql-bashprofile \
            file://postgresql.pam \
-           file://0001-Use-pkg-config-for-libxml2-detection.patch \
            file://postgresql-setup \
            file://postgresql.service \
-"
+           file://0001-Use-pkg-config-for-libxml2-detection.patch \
+           file://0002-Predict-integer-overflow-to-avoid-buffer-overruns.patch \
+           file://0003-Shore-up-ADMIN-OPTION-restrictions.patch \
+           file://0004-Prevent-privilege-escalation-in-explicit-calls-to-PL.patch \
+           file://0005-Avoid-repeated-name-lookups-during-table-and-index-D.patch \
+           file://0006-Fix-handling-of-wide-datetime-input-output.patch \
+           file://0007-Make-pqsignal-available-to-pg_regress-of-ECPG-and-is.patch \
+           file://0008-Prevent-potential-overruns-of-fixed-size-buffers.patch \
+          "
 
 LEAD_SONAME = "libpq.so"
 
