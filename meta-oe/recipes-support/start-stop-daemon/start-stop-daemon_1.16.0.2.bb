@@ -30,4 +30,9 @@ do_install_append () {
     # is no explicit rule for only installing ssd
     find ${D} -type f -not -name "*start-stop-daemon*" -exec rm {} \;
     find ${D} -depth -type d -empty -exec rmdir {} \;
+
+    # support for buggy init.d scripts that refer to an alternative
+    # explicit path to start-stop-daemon
+    mkdir -p ${D}/sbin/
+    ln -sf /usr/sbin/start-stop-daemon ${D}/sbin/start-stop-daemon
 }
