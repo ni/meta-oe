@@ -1,12 +1,15 @@
 SUMMARY = "Debian's start-stop-daemon utility extracted from the dpkg \
 package"
 LICENSE = "PD"
-LIC_FILES_CHKSUM = "file://utils/start-stop-daemon.c;md5=a963623e4588f70122865aaa7a370ce4"
+LIC_FILES_CHKSUM = "file://utils/start-stop-daemon.c;md5=aa6b59a0751f3bb15f430610faa15217"
 # start-stop-daemon is usually shipped by dpkg
 DEPENDS = "ncurses"
 RCONFLICTS_${PN} = "dpkg"
 
-SRC_URI = "http://sources.openembedded.org/dpkg_${PV}.tar.bz2"
+SRC_URI = " \
+    http://sources.openembedded.org/dpkg_${PV}.tar.bz2 \
+    file://dpkg-start-stop-daemon-Accept-SIG-prefixed-signal-na.patch \
+"
 SRC_URI[md5sum] = "d211a84f38987771a49ad1c0f144334a"
 SRC_URI[sha256sum] = "2a3d4ba83c743b3f004533fdd52372cb7b22f5c1da2042d0a31bbcc2b54c0ea5"
 

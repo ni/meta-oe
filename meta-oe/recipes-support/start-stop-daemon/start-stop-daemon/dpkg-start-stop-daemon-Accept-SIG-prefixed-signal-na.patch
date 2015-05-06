@@ -1,0 +1,73 @@
+From 83303fdc575bfd2ee8f45fb346a46fa2374a54bc Mon Sep 17 00:00:00 2001
+From: Haris Okanovic <haris.okanovic@ni.com>
+Date: Wed, 6 May 2015 12:24:49 -0500
+Subject: [PATCH] dpkg start-stop-daemon: Accept "SIG" prefixed signal names
+
+Modify signal name parser to accept "SIG" prefixed names, like the
+BusyBox implementation of start-stop-daemon.
+
+Upstream-Status: Inappropriate [workaround for buggy init.d scripts]
+
+Signed-off-by: Haris Okanovic <haris.okanovic@ni.com>
+---
+ utils/start-stop-daemon.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/utils/start-stop-daemon.c b/utils/start-stop-daemon.c
+index 4ea6b008225e76486a7a307de326c852a1cb03f5..54c18e91ca0da18c545fcab1e2ebbbfb65909e66 100644
+--- a/utils/start-stop-daemon.c
++++ b/utils/start-stop-daemon.c
+@@ -11,20 +11,23 @@
+  * changes by Klee Dienes <klee@debian.org>, also placed in the Public
+  * Domain.
+  *
+  * Changes by Ben Collins <bcollins@debian.org>, added --chuid, --background
+  * and --make-pidfile options, placed in public domain aswell.
+  *
+  * Port to OpenBSD by Sontri Tomo Huynh <huynh.29@osu.edu>
+  *                 and Andreas Schuldei <andreas@schuldei.org>
+  *
+  * Changes by Ian Jackson: added --retry (and associated rearrangements).
++ *
++ * Changes by Haris Okanovic <haris.okanovic@ni.com> to support 'SIG'
++ *     prefixed signal names placed in public domain as well.
+  */
+ 
+ #include <config.h>
+ #include <compat.h>
+ 
+ #include <dpkg/macros.h>
+ 
+ #if defined(linux) || (defined(__FreeBSD_kernel__) && defined(__GLIBC__))
+ #  define OSLinux
+ #elif defined(__GNU__)
+@@ -481,20 +484,26 @@ parse_integer(const char *string, int *value_r)
+ }
+ 
+ static int
+ parse_signal(const char *sig_str, int *sig_num)
+ {
+ 	unsigned int i;
+ 
+ 	if (parse_integer(sig_str, sig_num) == 0)
+ 		return 0;
+ 
++	/* Skip over optional "SIG" prefix */
++	if (strncmp(sig_str, "SIG", 3) == 0) {
++		warning("Using deprecated signal name %s. Drop the 'SIG' prefix.\n", sig_str);
++		sig_str += 3;
++	}
++
+ 	for (i = 0; i < array_count(siglist); i++) {
+ 		if (strcmp(sig_str, siglist[i].name) == 0) {
+ 			*sig_num = siglist[i].signal;
+ 			return 0;
+ 		}
+ 	}
+ 	return -1;
+ }
+ 
+ static int
+-- 
+2.2.2
+
