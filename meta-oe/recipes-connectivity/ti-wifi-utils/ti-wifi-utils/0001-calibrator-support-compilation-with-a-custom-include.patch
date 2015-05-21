@@ -1,0 +1,47 @@
+From 15fb1ef1b90f119ffc9a0064cf223407c6d43ff3 Mon Sep 17 00:00:00 2001
+From: Arik Nemtsov <arik@wizery.com>
+Date: Sun, 13 Oct 2013 14:24:07 +0300
+Subject: [PATCH] calibrator: support compilation with a custom include dir and
+ libnl3
+
+These can be controlled via the NLROOT and NLVER environment variables.
+See the Makefile for details.
+
+The patch was imported from TI's OpenLink github.com account:
+https://github.com/TI-OpenLink/ti-utils/commits/r5-jb/Makefile
+commit ID: 15fb1ef1b90f119ffc9a0064cf223407c6d43ff3
+
+Upstream-Status: Backport
+
+Signed-off-by: Arik Nemtsov <arik@wizery.com>
+---
+ Makefile | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index 5193b6d..08fc710 100644
+--- a/Makefile
++++ b/Makefile
+@@ -2,8 +2,18 @@ CC = $(CROSS_COMPILE)gcc
+ CFLAGS = -O2 -Wall
+ CFLAGS += -DCONFIG_LIBNL20 -I$(NFSROOT)/usr/include -I$(NFSROOT)/include
+ 
++ifdef NLROOT
++CFLAGS += -I${NLROOT}
++endif
++
+ LDFLAGS += -L$(NFSROOT)/lib
+-LIBS += -lnl -lnl-genl -lm
++LIBS += -lm
++
++ifeq ($(NLVER),3)
++	LIBS += -lnl-3 -lnl-genl-3
++else
++	LIBS += -lnl -lnl-genl
++endif
+ 
+ OBJS = nvs.o misc_cmds.o calibrator.o plt.o ini.o
+ 
+-- 
+1.9.1
+
