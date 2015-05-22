@@ -6,7 +6,7 @@ BUGTRACKER = "n/a"
 SECTION = "x11/fonts"
 
 LICENSE = "OFL-1.1"
-LIC_FILES_CHKSUM = "file://../PTSansPTSerifOFL.txt;md5=8400c100cc23eb366e978adb4782a666"
+LIC_FILES_CHKSUM = "file://../license-destdir/ttf-pt-sans/generic_OFL-1.1;md5=fac3a519e5e9eb96316656e0ca4f2b90"
 
 inherit allarch
 
