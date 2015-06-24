@@ -6,7 +6,7 @@ BUGTRACKER = "n/a"
 SECTION = "x11/fonts"
 
 LICENSE = "OFL-1.1"
-LIC_FILES_CHKSUM = "file://../PTSansPTSerifOFL.txt;md5=8400c100cc23eb366e978adb4782a666"
+LIC_FILES_CHKSUM = "file://../license-destdir/ttf-pt-sans/generic_OFL-1.1;md5=fac3a519e5e9eb96316656e0ca4f2b90"
 
 inherit allarch
 
@@ -19,8 +19,9 @@ FONT_PACKAGES = "${PN}"
 
 SRC_URI = "http://www.fontstock.com/public/PTSansOFL.zip"
 
-SRC_URI[md5sum] = "93b4e9d4099c7dbf043db92c5c43e40f"
-SRC_URI[sha256sum] = "7105b5e7d9965b5b2fa189b5a84c66a8252b3432c0293f1350c15ad159447ee1"
+SRC_URI[md5sum] = "e5b99133d3b72cd35400b5aa810ad0ee"
+SRC_URI[sha256sum] = "57448741b709c5f022127134ffd49506e3925242bd06f73a039e070765d1d637"
+
 
 do_install () {
 	install -d ${D}${datadir}/fonts/X11/TTF/
