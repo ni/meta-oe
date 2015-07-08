@@ -20,7 +20,7 @@ S = "${WORKDIR}/${PN}${PV}/js/src"
 
 inherit autotools pkgconfig perlnative
 
-DEPENDS += "nspr zlib"
+DEPENDS += "nspr zlib libice libxt"
 
 # nspr's package-config is ignored so set libs manually
 EXTRA_OECONF = " \
