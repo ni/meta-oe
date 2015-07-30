@@ -37,6 +37,8 @@ DEPENDS = "util-linux groff-native"
 # environments
 SRC_URI += "file://install-strip.patch"
 
+BBCLASSEXTEND = "native"
+
 inherit autotools-brokensep update-rc.d systemd
 
 # CV SETTINGS
