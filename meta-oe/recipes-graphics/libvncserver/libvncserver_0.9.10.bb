@@ -5,16 +5,20 @@ PRIORITY = "optional"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=361b6b837cad26c6900a926b62aada5f"
 
-DEPENDS += "zlib jpeg libpng gtk+ libgcrypt nettle gnutls gmp"
+DEPENDS += "zlib libsdl jpeg libpng gtk+ libgcrypt nettle gnutls gmp"
 RDEPENDS_${PN} += "libpng gtk+ libgcrypt"
 
-inherit autotools pkgconfig
+inherit autotools binconfig pkgconfig
 
-SRC_URI  = "https://github.com/LibVNC/libvncserver/archive/LibVNCServer-0.9.10.tar.gz"
+SRC_URI  = "\
+	 ${DEBIAN_MIRROR}/main/libv/libvncserver/libvncserver_0.9.10+dfsg.orig.tar.xz \
+	 file://0001-remove-webclients-build.patch \
+	 file://0002-common-add-sha1.patch \
+"
 
-SRC_URI[md5sum] = "e1b888fae717b06896f8aec100163d27"
-SRC_URI[sha256sum] = "ed10819a5bfbf269969f97f075939cc38273cc1b6d28bccfb0999fba489411f7"
+SRC_URI[md5sum] = "e883b6c7bd339a5e1c48645051abe5c4"
+SRC_URI[sha256sum] = "583f28869b82aec57768d7d18cd7ff81bf092ecbbc1209b587c2c2cd68330250"
 
 S = "${WORKDIR}/${PN}-LibVNCServer-${PV}"
 
-EXTRA_OEMAKE_append=" SUBDIRS='libvncserver' "
+TARGET_LDFLAGS += "-lgcrypt"
