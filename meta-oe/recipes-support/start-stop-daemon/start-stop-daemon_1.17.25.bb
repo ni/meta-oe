@@ -19,11 +19,8 @@ inherit autotools gettext pkgconfig
 S = "${WORKDIR}/dpkg-${PV}"
 
 EXTRA_OECONF = " \
-    --with-start-stop-daemon \
     --without-bz2 \
-    --without-install-info \
     --without-selinux \
-    --without-update-alternatives \
 "
 
 do_install_append () {
